@@ -1,0 +1,27 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: multi-module-application
+  sleuth:
+    reactor:
+      instrumentation-type: DECORATE_QUEUES
+    trace-id128: true
+    sampler:
+      probability: 1.0
+    enabled: true
+  cloud:
+    gateway:
+      routes:
+      - id: google
+        uri: https://www.google.com
+        predicates:
+        - Path=/google
+      - id: microsoft
+        uri: https://www.microsoft.com
+        predicates:
+        - Path=/microsoft
+      - id: web.de
+        uri: https://web.de
+        predicates:
+          - Path=/web
